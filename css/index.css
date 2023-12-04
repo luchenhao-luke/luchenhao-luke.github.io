@@ -1437,8 +1437,8 @@ canvas:not(#ribbon-canvas),
   --global-font-size: 14px;
   --global-bg: #fff;
   --font-color: #4c4948;
-  --hr-border: #d2ebfd;
-  --hr-before-color: #bfe4fb;
+  --hr-border: #f1e7be;
+  --hr-before-color: #ebdda4;
   --search-bg: #f6f8fa;
   --search-input-color: #4c4948;
   --search-a-color: #4c4948;
@@ -1544,7 +1544,7 @@ table td {
   vertical-align: middle;
 }
 *::selection {
-  background: #00c4b6;
+  background: #e2cf7d;
   color: #f7f7f7;
 }
 button {
@@ -2100,7 +2100,7 @@ figure.highlight pre .javascript .function {
   border-color: var(--pseudo-hover);
 }
 .article-sort-item-time {
-  color: #858585;
+  color: #8d8940;
   font-size: 95%;
 }
 .article-sort-item-time time {
@@ -2159,7 +2159,7 @@ figure.highlight pre .javascript .function {
 }
 .category-lists .category-list .category-list-count {
   margin-left: 8px;
-  color: #858585;
+  color: #8d8940;
 }
 .category-lists .category-list .category-list-count:before {
   content: '(';
@@ -2511,7 +2511,7 @@ figure.highlight pre .javascript .function {
 }
 #recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap {
   margin: 6px 0;
-  color: #858585;
+  color: #8d8940;
   font-size: 0.9em;
 }
 #recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .post-meta-date {
@@ -2533,7 +2533,7 @@ figure.highlight pre .javascript .function {
   margin: 0 4px;
 }
 #recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap a {
-  color: #858585;
+  color: #8d8940;
 }
 #recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap a:hover {
   color: #9c9753;
@@ -2725,7 +2725,7 @@ h1.page-title + .tag-cloud-list {
 #aside-content .aside-list > .aside-list-item .content > time,
 #aside-content .aside-list > .aside-list-item .content > .name {
   display: block;
-  color: #858585;
+  color: #8d8940;
   font-size: 85%;
 }
 #aside-content .aside-list > .aside-list-item .content > .title,
@@ -2947,7 +2947,7 @@ h1.page-title + .tag-cloud-list {
   color: #9c9753;
 }
 #aside-content #card-toc .toc-content .toc-link.active {
-  background: #37412b;
+  background: #e2cf7d;
   color: #fff;
 }
 #aside-content .sticky_layout:only-child > :first-child {
@@ -3913,7 +3913,7 @@ h1.page-title + .tag-cloud-list {
   overflow-wrap: break-word;
 }
 #article-container a {
-  color: #99a9bf;
+  color: #8d8940;
 }
 #article-container a:hover {
   text-decoration: underline;
