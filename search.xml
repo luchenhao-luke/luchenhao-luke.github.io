@@ -29,6 +29,31 @@
     
     
     <entry>
+      <title>数组小结</title>
+      <link href="/2023/11/30/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5Day3/"/>
+      <url>/2023/11/30/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5Day3/</url>
+      
+        <content type="html"><![CDATA[<h1 id="数组小结"><a href="#数组小结" class="headerlink" title="数组小结"></a>数组小结</h1><blockquote><p>数组是存放在连续内存空间上的相同类型数据的集合。</p></blockquote><p><img src="算法通关数组-7920053.png" alt="算法通关数组"  /></p><ol><li>数组的元素在内存中都是<code>相连</code>的，超出空间需要挪动整个数组在内存中的位置，因此：<ul><li>需要预留内存空间，如果后期用不上会浪费</li></ul></li><li>数组相比链表的优势：<ol><li>可以迅速找到数组中的任何元素<code>随机访问</code></li></ol></li></ol><ol><li><p>数组相比链表的劣势：</p><ol><li><p>插入元素需要将后面的元素都向后移动，如果后面的内存空间被占用，还要将整个数组复制到其他地方</p></li><li><p><code>增加</code>和<code>删除</code>元素的时候，难免要移动其他元素的地址</p><p> <img src="算法通关数组1.png" alt="算法通关数组1"></p></li></ol></li></ol><p>其他：</p><ul><li>数组的元素是不能删的，只能<code>覆盖</code>，也就是删掉元素之后把后面的元素往前移动一位，进行覆盖</li><li>很多涉及到数组删除的库函数，时间复杂度都是$O(n)$，因为要移动元素</li><li>要养成预先定义数组的习惯！</li></ul><div class="table-container"><table><thead><tr><th style="text-align:right"></th><th style="text-align:center">数组</th><th style="text-align:center">链表</th></tr></thead><tbody><tr><td style="text-align:right">读取</td><td style="text-align:center">$O(1)$</td><td style="text-align:center">$O(n)$</td></tr><tr><td style="text-align:right">插入</td><td style="text-align:center">$O(n)$</td><td style="text-align:center">$O(1)$</td></tr><tr><td style="text-align:right">删除</td><td style="text-align:center">$O(n)$</td><td style="text-align:center">$O(1)$</td></tr><tr><td style="text-align:right">适用场景</td><td style="text-align:center">数据量固定，频繁查询，较少增删</td><td style="text-align:center">数据量不固定，频繁增删，较少查询</td></tr></tbody></table></div>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数组 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>算法题Day1</title>
       <link href="/2023/11/29/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5Day1/"/>
       <url>/2023/11/29/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5Day1/</url>
