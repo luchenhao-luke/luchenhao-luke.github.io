@@ -1,0 +1,408 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Luke's Blog - 看世界，找自己</title><meta name="author" content="Luke"><meta name="copyright" content="Luke"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="See the world, find yourself.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Luke&#39;s Blog">
+<meta property="og:url" content="http://example.com/page/2/index.html">
+<meta property="og:site_name" content="Luke&#39;s Blog">
+<meta property="og:description" content="See the world, find yourself.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/avatar1.JPG">
+<meta property="article:author" content="Luke">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/avatar1.JPG"><link rel="shortcut icon" href="/img/avatar2.JPG"><link rel="canonical" href="http://example.com/page/2/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":-1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Luke\'s Blog',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2024-08-23 10:07:21'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.0.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar1.JPG" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('/img/background.jpeg')"><nav id="nav"><span id="blog-info"><a href="/" title="Luke's Blog"><span class="site-name">Luke's Blog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Luke's Blog</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/xxxxx" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:xxxxxx@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/03/06/%E5%A6%82%E4%BD%95%E4%BB%8E%E9%9B%B6%E6%96%B0%E9%85%8D%E7%BD%AE%E4%B8%80%E5%8F%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="无题">无题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-03-06T06:47:51.768Z" title="发表于 2024-03-06 14:47:51">2024-03-06</time></span></div><div class="content">Linux下创建新用户123# 使用 -m 命令来指定新建用户目录，使用 -s 来指定分配的终端为bash$ sudo useradd -m -s /bin/bash [user_name]$ sudo passwd [user_name]
+配置免密登录1ssh-copy-id -i ~/.ssh/id_rsa.pub luchenhao@10.105.10.51
+添加sudo权限1234chmod u+w /etc/sudoersvi /etc/sudoers 找到这行 root ALL=(ALL) ALL,在他下面添加lee ALL=(ALL) ALL(这里的lee是你的用户名)chmod u-w /etc/sudoers
+安装Zshhttps://sysin.org/blog/linux-zsh/
+配置config文件12345Host 10.11.12.218  HostName 10.11.12.218  User luchenhao  PreferredAuthentications publickey  IdentityFile /Users/luke/.ssh/id_r ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/03/04/Langchain-Chatchat%E7%9F%A5%E8%AF%86%E5%BA%93%E4%BB%A3%E7%A0%81%E8%AF%A6%E8%A7%A3/" title="Langchain-Chatchat知识库接口代码详解">Langchain-Chatchat知识库接口代码详解</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-03-04T06:58:00.000Z" title="发表于 2024-03-04 14:58:00">2024-03-04</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%A4%A7%E6%A8%A1%E5%9E%8B/">大模型</a></span></div><div class="content">
+本质上是在Langchain基础上封装的一层聊天服务，可以对接底层多种离线LLM和在线的LLM（也可以对接自定义的在线LLM）。提供基于知识库聊天功能相关的一系列API。
+
+
+项目结构123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153154155156157.├── configs│   ├── basic_config.py│   ├── _ ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/02/26/chatchat/" title="无题">无题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-02-26T01:23:58.819Z" title="发表于 2024-02-26 09:23:58">2024-02-26</time></span></div><div class="content">123docker run -itd -u root --name paddle_docker_jupyter -p 8080:8080 --gpus all -v $PWD:/paddle --network=host registry.baidubce.com/paddlepaddle/paddle:2.6.0-gpu-cuda12.0-cudnn8.9-trt8.6docker exec -it paddle_docker_jupyter /bin/bash
+1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
+私有化部署1234567891011121314151617181920git clone https://github.com/CodexDive/LLMChat.gitorgit clone git@github.com:CodexDive/LLMChat.gitdocker login 10.101.12.128# 机器：10.101.14.36docker pull 10.101.12.128/wxzhang/ragllm:v1.3d ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/01/25/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%B5%81%E7%A8%8B%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7%E8%B0%83%E7%A0%94/" title="大模型流程构建工具调研">大模型流程构建工具调研</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-01-25T13:50:01.000Z" title="发表于 2024-01-25 21:50:01">2024-01-25</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%A4%A7%E6%A8%A1%E5%9E%8B/">大模型</a></span></div><div class="content">通用大模型垂直大模型
+在通用大模型基础上，结合自身行业数据进行微调，可能带有外挂知识库
+结合特定行业的数据改变数据的分布，重新进行预训练，直接打造行业大模型
+(文本，专属预言)pair对大模型进行微调，完成【用户输入 – 大模型 – 专属语言输出 – 自有 AI 模型 – 业务结果输出】的全过程
+
+
+什么样的问题必须依靠大模型的能力？
+
+要用大模型，就必须关注到业务场景中是否有非结构化的数据需要处理。
+通义千问1pip install dashscope --upgrade
+ChatGLM + LangChain
+ChatGLM-6B
+
+自我认知能力
+提纲写作能力
+文案写作能力
+信息抽取能力
+
+
+ChatGLM-6B应用：大语言模型基于通识知识进行训练，在面对实际场景时，需要借助模型微调或提示词工程提升语言模型应用效果，具体包括a.垂直领域知识 b.基于私有数据的问答
+
+
+
+
+
+
+
+是什么
+使用场景
+
+
+
+
+微调/精调
+针对预先训练的语言模型，在特定任务的少量数据集上对其进行进一步训练
+当任务或域定义明确，并且有足够的标记数据可供训练时，通常使用微调过程。
+
+
+提示词工程
+涉及设计自然 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/01/16/%E5%9F%BA%E4%BA%8EHexo%E5%92%8CButterfly%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" title="基于Hexo和Butterfly搭建个人博客">基于Hexo和Butterfly搭建个人博客</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-01-16T03:49:50.000Z" title="发表于 2024-01-16 11:49:50">2024-01-16</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">搭建博客</a></span></div><div class="content">常用命令
+创建一篇博客：
+ 1sudo hexo new &quot;我的第一篇博客&quot;
+
+本地部署：
+ 1sudo hexo g &amp;&amp; hexo s
+
+远端部署：
+ 1sudo hexo g &amp;&amp; sudo hexo d
+
+清理文件夹缓存：
+ 1sudo hexo clean
+
+
+常见问题解决
+
+
+
+The ssh key doesn’t add to cmd environment.Using ssh-add to add the key.
+1ssh-add ~/.ssh/id_rsa
+
+表格无法正确显示
+ 解决办法：表格前面需要空一行，即可正确显示
+
+
+参考链接
+从零开始免费搭建自己的博客(一)——本地搭建hexo框架%E2%80%94%E2%80%94%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BAhexo%E6%A1%86%E6%9E%B6/)
+Butterfly 安裝文檔
+Butterfly美化
+
+</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/12/26/ChatGLM-6B%E6%8E%A8%E7%90%86/" title="ChatGLM-6B推理">ChatGLM-6B推理</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-12-26T09:39:04.000Z" title="发表于 2023-12-26 17:39:04">2023-12-26</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%A4%A7%E6%A8%A1%E5%9E%8B/">大模型</a></span></div><div class="content">连接服务器123456789101112$ ssh luchenhao@10.101.14.36$ passwd #设置密码$ ssh-copy-id -i ~/.ssh/id_rsa.pub luchenhao@10.101.14.36 #配置免密登录，本机传服务器#修改~/.ssh/config文件$ vi ~/.ssh/config```Host 10.199.160.252  HostName 10.199.160.252  User song  PreferredAuthentications publickey  IdentityFile /Users/adenialzz/.ssh/id_rsa```
+docker命令
+123456docker run -itd -u root --name chatglm2-6b --gpus all 10.101.12.128/wxzhang/modelscope:ubuntu22.04-cuda11.8.0-py310-torch2.1.0-tf2.14.0-1.10.0_finaldocker exec -it a3e9 /bin/ ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/12/14/GLM%E9%A2%84%E8%AE%AD%E7%BB%83/" title="GLM预训练">GLM预训练</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-12-14T09:39:04.000Z" title="发表于 2023-12-14 17:39:04">2023-12-14</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%A4%A7%E6%A8%A1%E5%9E%8B/">大模型</a></span></div><div class="content">GLM-7B预训练过程目录1234$ ssh root@10.106.86.1 -p 31631 (pass:yangfei@2023)$ cat /etc/mpi/hostfile$ ssh yangfei-science-computer-app-worker-0.yangfei-science-computer-app$ cd /mnt/nas/1/GLM-main
+准备hostfile12345$ vi hostfileyangfei-science-computer-app-master-0.yangfei-science-computer-app slots=8yangfei-science-computer-app-worker-0.yangfei-science-computer-app slots=8yangfei-science-computer-app-worker-1.yangfei-science-computer-app slots=8yangfei-science-computer-app-worker-2.yangfei-science-computer ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/12/02/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5Day4/" title="算法题Day3">算法题Day3</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-12-02T10:00:06.000Z" title="发表于 2023-12-02 18:00:06">2023-12-02</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98/">算法题</a></span></div><div class="content">链表
+链表是线性表的链式存储结构，数组是线性表的顺序存储结构，链表可以解决数组的不足
+
+
+链表由两部分组成，一个是指针域(存放指向下一个节点的指针）、一个是数据域（存放元素）
+链表的每个元素都存储了下一个元素的地址，因此在内存中不是连续的（分配机制取决于操作系统的内存管理）
+相比数组的劣势：
+无法跳跃式的读取元素，因为你不能知道最后一个元素的内存地址，既只能顺序访问
+
+
+相比数组的优势：
+只要有足够的内存空间，就能为链表分配内存。而数组就算有足够的内存空间，也不一定能放下，因为数组要求连续的空间。
+
+
+链表的类型：
+单链表
+双链表（两个指针域）
+循环链表
+
+
+
+常见链表操作
+删除节点：只要将C节点的next指针指向E节点就可以，Python会自动回收D节点的内存，C++则需要手动释放这块内存，该操作的时间复杂度是$O(1)$，但是查到D元素的时间复杂度是$O(n)$，因为链表需要顺序访问
+
+添加节点：将C指向F，F再指向D，时间复杂度是$O(1)$
+
+查找节点：时间复杂度是$O(n)$
+
+
+链表 vs 数组
+
+
+
+
+数组
+链表
+
+
+
+
+读取
+$O(1)$
+$O(n)$
+
+
+插入
+$O( ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/12/01/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5Day3/" title="数组小结">数组小结</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-12-01T10:00:06.000Z" title="发表于 2023-12-01 18:00:06">2023-12-01</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98/">算法题</a></span></div><div class="content">数组小结
+数组是存放在连续内存空间上的相同类型数据的集合。
+
+
+
+数组的元素在内存中都是相连的，超出空间需要挪动整个数组在内存中的位置，因此：
+ a. 需要预留内存空间，如果后期用不上会浪费
+
+数组相比链表的优势：
+ a. 可以迅速找到数组中的任何元素随机访问
+
+
+
+数组相比链表的劣势：
+ a. 插入元素需要将后面的元素都向后移动，如果后面的内存空间被占用，还要将整个数组复制到其他地方
+ b. 增加和删除元素的时候，难免要移动其他元素的地址
+ 
+
+
+其他：
+
+数组的元素是不能删的，只能覆盖，也就是删掉元素之后把后面的元素往前移动一位，进行覆盖
+很多涉及到数组删除的库函数，时间复杂度都是$O(n)$，因为要移动元素
+要养成预先定义数组的习惯！
+
+
+
+
+
+
+数组
+链表
+
+
+
+
+读取
+$O(1)$
+$O(n)$
+
+
+插入
+$O(n)$
+$O(1)$
+
+
+删除
+$O(n)$
+$O(1)$
+
+
+适用场景
+数据量固定，频繁查询，较少增删
+数据量不固定，频繁增删，较少查询
+
+
+
+
+</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/11/30/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5Day2/" title="算法题Day2">算法题Day2</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-11-30T07:30:06.000Z" title="发表于 2023-11-30 15:30:06">2023-11-30</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98/">算法题</a></span></div><div class="content">代码随想录算法训练营第二天| 977. 有序数组的平方、209.长度最小的子数组、59.螺旋矩阵II。977. 有序数组的平方
+题目链接
+给你一个按 非递减顺序 排序的整数数组 nums，返回 每个数字的平方 组成的新数组，要求也按 非递减顺序 排序。
+  示例 1：
+1234输入：nums = [-4,-1,0,3,10]输出：[0,1,9,16,100]解释：平方后，数组变为 [16,1,0,9,100]排序后，数组变为 [0,1,9,16,100]
+  示例 1：
+12输入：nums = [-7,-3,2,3,11]输出：[4,9,9,49,121]
+
+题解：1. 有序数组 2. 平方之后排序
+
+视频总结：
+
+平方之后最大元素一定是在两边，数组从两边往里慢慢缩小
+返回新数组，不要求空间复杂度
+
+
+个人思路：sorted(x*x for x in nums)
+
+难点：
+
+平方之后最大的元素一定在两边
+想到头尾双指针操作
+
+
+学习时长：40mins
+
+动画：
+
+
+
+LeetCode代码：
+
+第一种解法(暴力排序)
+1234567# 暴力解法，先平方，后排序class Solution ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#content-inner">3</a><a class="extend next" rel="next" href="/page/3/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar1.JPG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Luke</div><div class="author-info__description">See the world, find yourself.</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/xxxxx" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:xxxxxx@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">代码随想录算法题，持续更新中！！！</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/29/%E7%A7%8D%E5%AD%90%E7%8F%AD%E7%AC%94%E8%AE%B0/" title="无题">无题</a><time datetime="2024-06-29T09:21:38.427Z" title="发表于 2024-06-29 17:21:38">2024-06-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/11/Graph%20RAG%20%E4%B8%8E%20Text2Cypher%20%E7%9A%84%E5%AF%B9%E6%AF%94/" title="无题">无题</a><time datetime="2024-06-11T08:14:20.029Z" title="发表于 2024-06-11 16:14:20">2024-06-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/05/RAG%E9%9D%A2%E8%AF%95%E9%A2%98/" title="无题">无题</a><time datetime="2024-06-05T02:05:58.294Z" title="发表于 2024-06-05 10:05:58">2024-06-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/04/11/Self-RAG/" title="无题">无题</a><time datetime="2024-04-11T06:22:25.781Z" title="发表于 2024-04-11 14:22:25">2024-04-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/04/11/C-RAG/" title="无题">无题</a><time datetime="2024-04-11T02:39:42.121Z" title="发表于 2024-04-11 10:39:42">2024-04-11</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%A4%A7%E6%A8%A1%E5%9E%8B/"><span class="card-category-list-name">大模型</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/"><span class="card-category-list-name">搭建博客</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98/"><span class="card-category-list-name">算法题</span><span class="card-category-list-count">4</span></a></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/ChatGLM/" style="font-size: 1.3em; color: #99a1ac">ChatGLM</a> <a href="/tags/%E6%95%B0%E7%BB%84/" style="font-size: 1.5em; color: #99a9bf">数组</a> <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%B7%A5%E5%85%B7/" style="font-size: 1.1em; color: #999">大模型应用工具</a> <a href="/tags/Langchain/" style="font-size: 1.1em; color: #999">Langchain</a> <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8/" style="font-size: 1.1em; color: #999">大模型应用</a> <a href="/tags/%E9%93%BE%E8%A1%A8/" style="font-size: 1.1em; color: #999">链表</a> <a href="/tags/LangChain/" style="font-size: 1.1em; color: #999">LangChain</a> <a href="/tags/Hexo/" style="font-size: 1.1em; color: #999">Hexo</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/06/"><span class="card-archive-list-date">六月 2024</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/04/"><span class="card-archive-list-date">四月 2024</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/03/"><span class="card-archive-list-date">三月 2024</span><span class="card-archive-list-count">5</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/02/"><span class="card-archive-list-date">二月 2024</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/01/"><span class="card-archive-list-date">一月 2024</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/12/"><span class="card-archive-list-date">十二月 2023</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">十一月 2023</span><span class="card-archive-list-count">2</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">21</div></div><div class="webinfo-item"><div class="item-name">已运行时间 :</div><div class="item-count" id="runtimeshow" data-publishDate="2023-11-28T16:00:00.000Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2024-08-23T02:07:21.499Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2024 By Luke</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>window.typedJSFn = {
+  init: (str) => {
+    window.typed = new Typed('#subtitle', Object.assign({
+      strings: str,
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50,
+    }, null))
+  },
+  run: (subtitleType) => {
+    if (true) {
+      if (typeof Typed === 'function') {
+        subtitleType()
+      } else {
+        getScript('https://cdn.jsdelivr.net/npm/typed.js/dist/typed.umd.min.js').then(subtitleType)
+      }
+    } else {
+      subtitleType()
+    }
+  }
+}
+</script><script>function subtitleType () {
+  if (true) {
+    typedJSFn.init(["看世界，找自己"])
+  } else {
+    document.getElementById("subtitle").textContent = "看世界，找自己"
+  }
+}
+typedJSFn.run(subtitleType)</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Luke's Blog | Luke's Blog</title><meta name="author" content="Luke"><meta name="copyright" content="Luke"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="Graph RAG 与 Text2Cypher 的对比 基于图谱的 LLM 的另一种有趣方法是 Text2Cypher，即自然语言生成图查询。这种方法不依赖于实体的子图检索，而是将任务&#x2F;问题翻译成一个面向答案的特定图查询，和我们常说的 Text2SQL 本质是一样的。 Text2Cypher 和 Graph RAG 这两种方法主要在其检索机制上有所不同。Text2Cypher 根据知识图谱的 Sc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Luke&#39;s Blog">
+<meta property="og:url" content="http://example.com/2024/06/11/Graph%20RAG%20%E4%B8%8E%20Text2Cypher%20%E7%9A%84%E5%AF%B9%E6%AF%94/index.html">
+<meta property="og:site_name" content="Luke&#39;s Blog">
+<meta property="og:description" content="Graph RAG 与 Text2Cypher 的对比 基于图谱的 LLM 的另一种有趣方法是 Text2Cypher，即自然语言生成图查询。这种方法不依赖于实体的子图检索，而是将任务&#x2F;问题翻译成一个面向答案的特定图查询，和我们常说的 Text2SQL 本质是一样的。 Text2Cypher 和 Graph RAG 这两种方法主要在其检索机制上有所不同。Text2Cypher 根据知识图谱的 Sc">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/avatar1.JPG">
+<meta property="article:published_time" content="2024-06-11T08:14:20.029Z">
+<meta property="article:modified_time" content="2024-06-12T06:58:28.423Z">
+<meta property="article:author" content="Luke">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/avatar1.JPG"><link rel="shortcut icon" href="/img/avatar2.JPG"><link rel="canonical" href="http://example.com/2024/06/11/Graph%20RAG%20%E4%B8%8E%20Text2Cypher%20%E7%9A%84%E5%AF%B9%E6%AF%94/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":-1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Luke\'s Blog',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2024-06-12 14:58:28'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.0.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar1.JPG" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/background.jpeg')"><nav id="nav"><span id="blog-info"><a href="/" title="Luke's Blog"><span class="site-name">Luke's Blog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">无题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-06-11T08:14:20.029Z" title="发表于 2024-06-11 16:14:20">2024-06-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-06-12T06:58:28.423Z" title="更新于 2024-06-12 14:58:28">2024-06-12</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong>Graph RAG 与 Text2Cypher 的对比</strong></p>
+<p>基于图谱的 LLM 的另一种有趣方法是 Text2Cypher，即自然语言生成图查询。这种方法不依赖于实体的子图检索，而是将任务/问题翻译成一个面向答案的特定图查询，和我们常说的 Text2SQL 本质是一样的。</p>
+<p>Text2Cypher 和 Graph RAG 这两种方法主要在其检索机制上有所不同。Text2Cypher 根据知识图谱的 Schema 和给定的任务生成图形模式查询，而 （Sub）Graph RAG 获取相关的子图以提供上下文。两者都有其优点，大家可以通过这个 demo ，更直观理解他们的特点</p>
+<p>无论你采取哪种方法，过程中的关键步骤是将你的知识库组织到你的图中。LLMGraphTransformer 就是这么一个强大的库，他可以将非结构化知识映射到你的图数据库变得更容易，下文字中，我们会用 Neo4j 作为用例来实现。</p>
+<p>LangChain 有一个特别活跃的生态系统，包括库、预建组件和连接器，使得将 LLM 集成到你的应用中变得更容易。它的最新发布之一确实是朝着 GraphRAG 的方向：LLMGraphTransformer。</p>
+<p><strong>CypherChain</strong></p>
+<p>LangGraph的实现方式是把之前基于AgentExecutor的黑盒调用过程用一种新的形式来构建：状态图（StateGraph）。把基于LLM的任务（比如RAG、代码生成等）细节用Graph进行精确的定义（定义图的节点与边），最后基于这个图来编译生成应用；在任务运行过程中，维持一个中央状态对象(state)，会根据节点的跳转不断更新，状态包含的属性可自行定义。</p>
+<p>从三元组到子图</p>
+<ol>
+<li>Do retrieval as Vector and Graph RAG</li>
+<li>Answer synthesis based on <strong>both related chunks and SubGraphs</strong></li>
+</ol>
+<p><img src="/Users/luke/Library/Application Support/typora-user-images/截屏2024-06-06 10.26.04.png" alt="截屏2024-06-06 10.26.04"></p>
+<p>大语言模型面试题：</p>
+<ol>
+<li><p>bert的架构：仅有编码器的transformer架构</p>
+</li>
+<li><p>说一个早期的预训练模型：ELMO</p>
+</li>
+<li><p>早期预训练模型的缺点：</p>
+<ul>
+<li>传统序列神经网络的长文本建模能力较弱 -&gt; self-attention建模长程序列关系</li>
+<li>不容易并行训练 -&gt; transformer可以通过GPU或TPU进行加速训练，为研发大语言模型提供了可并行优化的神经网络架构</li>
+</ul>
+</li>
+<li><p>GPT1的架构：仅有解码器的transformer架构</p>
+</li>
+<li><p>transformer编码器和解码器架构的优缺点：</p>
+<ul>
+<li>编码器架构更适合解决自然语言理解任务（完形填空）</li>
+<li>解码器架构更适合解决自然语言生成任务（文本摘要）</li>
+</ul>
+</li>
+<li><p>什么时候开始确立了“预训练=微调”的任务求解范式：</p>
+<ul>
+<li>从ELMo、BERT、GPT1开始</li>
+</ul>
+</li>
+<li><p>解释一下“扩展法则”：通过增加模型参数规模或者数据规模，通常会带来下游任务的模型性能提升，这种现象通常被称为“扩展法则”</p>
+</li>
+<li><p>解释一下“涌现能力”：涌现能力是大模型具有但小模型没有的能力，例如gpt3可以通过“上下文学习”的方式利用少样本数据解决下游任务，而gpt2则不具备这一能力。且为了区别这一能力上的差异，才出现了“大语言模型”这一词（上下文学习、思维链都是大模型有但小模型没有的能力）</p>
+</li>
+<li><p>说几个大语言模型的能力特点：</p>
+<ol>
+<li>具有较为丰富的世界知识</li>
+<li>具有较强的通用任务解决能力</li>
+<li>具有较好的复杂任务推理能力</li>
+<li>具有较强的人类指令遵循能力</li>
+<li>具有较好的人类对齐能力</li>
+<li>具有可拓展的工具使用能力</li>
+</ol>
+</li>
+<li><p>大语言模型的关键技术有哪些？</p>
+<ul>
+<li>规模扩展：模型参数规模和高质量数据规模的扩展</li>
+<li>数据工程：数据全面采集、数据清洗、数据配比</li>
+<li>高效预训练: 分布式训练软件（deepspeed和Megatron-lm）、混合精度训练</li>
+<li>能力激发：指令微调和提示工程</li>
+<li>人类对齐：RLHF</li>
+<li>工具使用</li>
+</ul>
+</li>
+<li><p>大模型所需要的最小参数规模是多少？目前还没有明确的标准，通常指百亿以上的模型，也有部分工作认为经过大规模数据预训练的数十亿参数级别的模型也可以称之为大语言模型（如LLAMA-7B）</p>
+</li>
+<li><p>大语言模型的构建过程有几个阶段？三个阶段，分别是大规模预训练、指令微调和人类对其</p>
+</li>
+<li><p>现有大语言模型的技术路径是什么？“解码器架构+预测下一个词”</p>
+</li>
+<li><p>训练百亿模型需要多大规模的集群和多大规模的词元？百卡规模的算力集群（A100_80G）和2~3T的词元</p>
+</li>
+<li><p>预训练过程中的经验性技术有哪些？数据配比、学习率调整、早期发现模型的异常行为</p>
+</li>
+<li><p>解释一下“指令微调”和“人类对齐”：1.指令微调sft即使用任务输入与输出的配对数据进行模型训练，可以使得语言模型较好的掌握通过问答形式进行任务求解的能力（来源于机器学习中的模仿学习），指令微调很难起到知识注入作用，只能起到能力激发作用，数千条或数万条高质量指令微调数据可以达到不错的微调效果；2. 人类对齐rlhf通过使用强化学习加强模型的对齐能力，需要训练一个符合人类价值观的奖励模型，并且需要标注人员针对大语言模型生成的多条输出进行偏好排序，使用偏好排序的数据训练奖励模型，用于判断模型的输出质量</p>
+</li>
+<li><p>对比一下KM扩展法则和Chinchilla扩展法则：随着算力预算的增加，KM倾向于将更大的预算分配给模型规模的增加，CC则主张模型规模和数据规模等比例关系增加（数据规模大概是参数规模的五倍），但最近发现transformer架构有较好的数据扩展性，还没有实验能够验证特定参数规模的语言模型的饱和数据规模</p>
+</li>
+<li><p>大模型代表性的涌现能力有哪些？上下文学习（举例）、指令遵循（sft）、逐步推理（思维链）</p>
+</li>
+<li><p>GPT系列模型的几个关键要素？1. 训练能够准确预测下一个词的transformer（只包含解码器），2. 扩展语言模型的规模和预训练数据的规模</p>
+</li>
+<li><p>数据预处理包含哪些步骤：数据清洗（过滤html等标签）、质量过滤、去重、隐私过滤、词元化（分词）、数据调度（也叫数据混合）</p>
+</li>
+<li><p>典型的数据混合比例：LLaMA [34] 的预训练数据主要包括超过 80% 的网页数据、 来自 GitHub 和 StackExchange 的 6.5% 代码密集型数据、4.5% 的书籍数据,以及来自 arXiv 的 2.5% 科学数据,</p>
+</li>
+<li><p>数据混合策略：1. 增加数据源的多样性 2. 数据课程（多阶段多种数据训练方法）3.训练多个候选的1B的小语言模型来判断最优配比策略（最终,YuLan 的预训练阶段共使用了 1,680B 词元,其中包括 1,380B 英文数据,280B 中文数据,以及20B 的多语数据）</p>
+</li>
+<li><p>介绍下数据课程并举例说明：为了学习某些特定的技能,按照技能依赖顺序编排对应数据集的学习方法(例如,基本技能 → 目标技能)比直接在相关的特定语料库上学习效果更好。</p>
+<ul>
+<li><p>代码能力：举例1：CodeLLaMA [151],能够更为有效地执行代码任务。采用的数据为: 2T 通用词元 → 500B 代码密集型词元。 这里, 使用符号 “→” 来表示数据课程中的数据顺序,指的是大语言模型首先用 2T 网页数据词元进行训练,随后用 500B 代码数据词元训练。CodeLLaMA 还提供了一个面向 Python 语言的特定代码大模型, 即 CodeLLaMA-Python,采用了如下的数据训练课程:2T 通用词元 → 500B 代码相关的词元 → 100B Python 代码相关的词元。</p>
+</li>
+<li><p>长文本能力：举例2：CodeLLaMA 将 LLaMA-2 的上下文窗口从 4K 扩展到了 100K,所采用的数据课程为:2.5T 词元,4K 上下文窗口 → 20B 词元,16K 上下文窗口。通过使用这种训练序列长度由短到长的数据课程,能够使模型获得较好的长文本建模能力,同时可以节省长文本模型的训练时间。</p>
+</li>
+</ul>
+</li>
+<li><p>大语言模型和transformer的区别：与 BERT 等早期的预训练语言模型相比,大语言模型的特点是使用了更长的向量维度、 更深的层数, 进而包含了更大规模的模型参数, 并主要使用解码器架构, 对于 Transformer 本身的结构与配置改变并不大。</p>
+</li>
+<li><p>多头自注意力机制的用处：作为对比,循环神经网络迭代地利用前一个时刻的状态更新当前时刻的状态, 因此在处理较长序列的时候,常常会出现梯度爆炸或者梯度消失的问题。而在卷积神经网络中,只有位于同一个卷积核的窗口中的词元可以直接进行交互,通过堆叠层数来实现远距离词元间信息的交换。</p>
+</li>
+<li><p>多头自注意力机制的优点：自注意力机制能够直接建模序列中任意两个位置之间的关系,进而有效捕获长程依赖关系,具有更强的序列建模能力。另一个主要的优势是,自注意力的计算过程对于基于硬件的并行优化(如 GPU、TPU 等)非常友好, 因此能够支持大规模参数的高效优化。</p>
+</li>
+<li><p>Transformer 中的前馈神经网络由两个线性变换和一个非线性激活函数组成ReLU</p>
+</li>
+<li><p>在注意力和前馈网络后,模型使用层归一化和残差连接来加强模型的训练稳定度</p>
+<ul>
+<li><p>在注意力和前馈网络后,模型使用层归一化和残差连接来加强模型的训练稳定度。其中,残差连接(Residual Connection)将输入与该层的输出相加,实现了信息在不同层的跳跃传递,从而缓解梯度爆炸和消失的问题</p>
+</li>
+<li><p>而 LayerNorm 则对数据进行重新放缩,提升模型的训练稳定性</p>
+</li>
+</ul>
+</li>
+<li><p>批次归一化(Batch Normalization, BN)[161] 是一种广泛采用的归一化方法。然而,该方法难以处理可变长度的序列数据和小批次数据。</p>
+</li>
+<li><p>硬件优化的注意力机制有哪些？FlashAttention 通过矩阵分块计算以及减少内存读写次数的方式,提高注意力分数的计算效率;PagedAttention 则针对增量解码阶段,对于 KV 缓存进行分块存储,并优化了计算方式,增大了并行计算度,从而提高了计算效率。</p>
+</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Luke</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2024/06/11/Graph%20RAG%20%E4%B8%8E%20Text2Cypher%20%E7%9A%84%E5%AF%B9%E6%AF%94/">http://example.com/2024/06/11/Graph RAG 与 Text2Cypher 的对比/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">Luke's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/avatar1.JPG" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/06/29/%E7%A7%8D%E5%AD%90%E7%8F%AD%E7%AC%94%E8%AE%B0/" title=""><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info"></div></div></a></div><div class="next-post pull-right"><a href="/2024/06/05/RAG%E9%9D%A2%E8%AF%95%E9%A2%98/" title=""><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info"></div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar1.JPG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Luke</div><div class="author-info__description">See the world, find yourself.</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/xxxxx" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:xxxxxx@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">代码随想录算法题，持续更新中！！！</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/29/%E7%A7%8D%E5%AD%90%E7%8F%AD%E7%AC%94%E8%AE%B0/" title="无题">无题</a><time datetime="2024-06-29T09:21:38.427Z" title="发表于 2024-06-29 17:21:38">2024-06-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/11/Graph%20RAG%20%E4%B8%8E%20Text2Cypher%20%E7%9A%84%E5%AF%B9%E6%AF%94/" title="无题">无题</a><time datetime="2024-06-11T08:14:20.029Z" title="发表于 2024-06-11 16:14:20">2024-06-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/05/RAG%E9%9D%A2%E8%AF%95%E9%A2%98/" title="无题">无题</a><time datetime="2024-06-05T02:05:58.294Z" title="发表于 2024-06-05 10:05:58">2024-06-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/04/11/Self-RAG/" title="无题">无题</a><time datetime="2024-04-11T06:22:25.781Z" title="发表于 2024-04-11 14:22:25">2024-04-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/04/11/C-RAG/" title="无题">无题</a><time datetime="2024-04-11T02:39:42.121Z" title="发表于 2024-04-11 10:39:42">2024-04-11</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2024 By Luke</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

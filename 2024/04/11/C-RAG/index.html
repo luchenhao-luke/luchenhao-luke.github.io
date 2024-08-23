@@ -1,0 +1,256 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Luke's Blog | Luke's Blog</title><meta name="author" content="Luke"><meta name="copyright" content="Luke"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="Abstract​    大型语言模型（LLM）不可避免地会产生幻觉，因为生成文本的准确性不能仅靠模型所包含的参数知识来保证。尽管检索增强生成（RAG）是对 LLM 的一种实用补充，但它在很大程度上依赖于检索文档的相关性，这让人担心如果检索出错，模型会如何表现。为此，我们提出了纠正 检索 增强 生成（CRAG）来提高生成的鲁棒性。具体来说，我们设计了一个轻量级检索评估器，用于评估检索到的查询文档的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Luke&#39;s Blog">
+<meta property="og:url" content="http://example.com/2024/04/11/C-RAG/index.html">
+<meta property="og:site_name" content="Luke&#39;s Blog">
+<meta property="og:description" content="Abstract​    大型语言模型（LLM）不可避免地会产生幻觉，因为生成文本的准确性不能仅靠模型所包含的参数知识来保证。尽管检索增强生成（RAG）是对 LLM 的一种实用补充，但它在很大程度上依赖于检索文档的相关性，这让人担心如果检索出错，模型会如何表现。为此，我们提出了纠正 检索 增强 生成（CRAG）来提高生成的鲁棒性。具体来说，我们设计了一个轻量级检索评估器，用于评估检索到的查询文档的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/avatar1.JPG">
+<meta property="article:published_time" content="2024-04-11T02:39:42.121Z">
+<meta property="article:modified_time" content="2024-05-06T02:48:14.517Z">
+<meta property="article:author" content="Luke">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/avatar1.JPG"><link rel="shortcut icon" href="/img/avatar2.JPG"><link rel="canonical" href="http://example.com/2024/04/11/C-RAG/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":-1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Luke\'s Blog',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-05-06 10:48:14'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.0.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar1.JPG" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/background.jpeg')"><nav id="nav"><span id="blog-info"><a href="/" title="Luke's Blog"><span class="site-name">Luke's Blog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">无题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-04-11T02:39:42.121Z" title="发表于 2024-04-11 10:39:42">2024-04-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-05-06T02:48:14.517Z" title="更新于 2024-05-06 10:48:14">2024-05-06</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>​    大型语言模型（LLM）不可避免地会产生幻觉，因为生成文本的准确性不能仅靠模型所包含的参数知识来保证。尽管检索增强生成（RAG）是对 LLM 的一种实用补充，但它在很大程度上依赖于检索文档的相关性，这让人担心如果检索出错，模型会如何表现。为此，我们提出了<strong>纠正</strong> <strong>检索</strong> <strong>增强</strong> <strong>生成</strong>（CRAG）来提高生成的鲁棒性。具体来说，我们设计了一个轻量级检索评估器，用于评估检索到的查询文档的整体质量，并返回一个置信度，在此基础上触发不同的知识检索操作。由于从静态和有限的语料库中检索只能返回次优文档，因此利用大规模网络搜索作为扩展，以增强检索结果。此外，还为检索到的文档设计了一种先分解再重组的算法，以选择性地关注关键信息并过滤掉其中的无关信息。CRAG 即插即用，可与各种基于 RAG 的方法无缝结合。在四个数据集上进行的实验表明，CRAG 可以显著提高基于 RAG 方法的性能。</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>​    大语言模型（LLMs）吸引了越来越多的关注，并在理解指令和生成流畅语言文本方面表现出令人印象深刻的能力（Brown 等，2020；欧阳等，2022；Touvron 等，2023a）。然而，由于 LLMs 与事实错误作斗争（Mallenet 等人，2023 年；闵等人，2023 年），并且无法仅凭其所包含的参数知识来确保生成文本的准确性（张等人，2023 年 b；穆尔盖等人，2023 年），因此他们不可避免地会产生幻觉（吉等人，2023 年）。</p>
+<blockquote>
+<p>图 1：这些例子表明，低质量的检索器容易引入大量无关信息，妨碍生成者获取准确的知识，并可能误导他们。</p>
+</blockquote>
+<p>​    先前的研究已经引入了检索技术，以纳入相关知识和增强生成，例如检索增强生成（RAG）（Lewis 等人，2020 年）。在这一框架中，通过预置从外部知识语料库检索到的相关文档来增强模型的输入（Guuet 等人，2020 年）。虽然 RAG 可作为 LLM 的实用补充，但其有效性取决于检索文档的相关性和准确性（Li 等人，2022 年；Tan 等人，2022 年）。在检索可能失败或返回不准确结果的情况下，生成对所检索知识的严重依赖引起了人们对模型行为和性能的极大关注（Shi 等人，2023 年）。如图 1 所示，低质量的检索器容易引入大量无关信息，阻碍模型获取准确知识，并可能误导模型，导致幻觉等问题（Zhang 等，2023b）。然而，大多数传统的 RAG 方法会不加区分地纳入检索到的文档，而不管这些文档是否相关（Rony 等，2022 年）。此外，当前的方法在检索和使用过程中大多将完整的文档作为参考知识。但是，这些检索到的文档中的相当一部分文本往往对生成并不重要，而这些文本本不应该同样被参考并参与到 RAG 中。</p>
+<p>​    鉴于上述问题，本文特别研究了检索器返回不准确结果的情况。本文提出了一种名为 “<strong>修正</strong> <strong>检索-增强</strong> <strong>生成</strong>（CRAG）”的方法，用于自我修正检索器的结果，并提高增强生成对文档的利用率。 设计了一种轻量级检索评估器，用于评估查询所检索文档的整体质量。 它是 RAG 的重要组成部分，通过审查和评估检索文档的相关性和可靠性，为信息生成做出贡献。   在量化置信度的基础上，可以触发{正确、不正确、模糊}等不同的知识检索操作。对于后两种操作，大规模网络搜索<a href="#bookmark18">（Piktus</a> <a href="#bookmark18">等人，2021 年；</a><a href="#bookmark19">Komeili 等人，2022 年）作为</a>一种战略扩展被<a href="#bookmark19">整合进来</a>，因为从静态和有限的语料库中检索只能返回在范围和多样性方面次优的文档。 实施这种扩展是为了扩大检索信息的范围，利用网络的扩展性和动态性来补充和丰富最初获得的文档。此外，为了消除检索文档中对 RAG 无益的冗余内容，在整个检索和利用过程中，我们精心设计了一种分解—再分解算法。 该算法确保对检索到的信息进行细化，优化关键见解的提取，尽量减少非必要元素的包含，从而提高检索数据的利用率。</p>
+<p>​    CRAG 即插即用，并<a href="#bookmark12">在 RAG（Lewis 等人，</a> <a href="#bookmark12">2020 年）和</a>Self-RAG<a href="#bookmark20">（Asai 等人，2023 年）</a>中进行了实验<a href="#bookmark12">实施</a>，<a href="#bookmark20">以证明其</a>对基于 RAG 的方法的适应性。在<a href="#bookmark8">PopQA（Mallen 等人，2023 年）、</a><a href="#bookmark22">Biog</a> <a href="#bookmark8">-raphy</a><a href="#bookmark9">（Min 等人，2023 年）、Pub Health（</a><a href="#bookmark21">Zhang</a>等人，2023 年<a href="#bookmark21">a</a>）和 Arc-Challenge （<a href="#bookmark22">Bhakthavatsalam 等</a>人，<a href="#bookmark22">2021</a> 年）这<a href="#bookmark8">四个数据集上</a>的结果表明，CRAG 可以显著提高标准 RAG 和最先进的 Self-RAG 的性能，证明了它在短表和长表生成任务中的通用性。为方便他人复制我们的结果，我们将在稍后公布所有源代码。</p>
+<p>​    总之，我们在本文中的贡献有三个方面：1）本文研究了检索器返回不准确结果的情况，并就我们所知，首次尝试为 RAG 设计纠正策略，以提高其鲁棒性。2) 提出了一种名为 CRAG 的即插即用方法，以提高自动自我纠正能力和检索文档的有效利用率。 3) 实验结果广泛证明了 CRAG 对基于 RAG 的方法的适应性及其在长短格式生成任务中的通用性。</p>
+<h2 id="2-相关工作"><a href="#2-相关工作" class="headerlink" title="2 相关工作"></a>2 相关工作</h2><ol>
+<li><p><strong>语言学习者的幻觉</strong> 虽然语言学习者在理解指令和生成流畅的语言文本方面表现出了令人印象深刻的能力<a href="#bookmark23">（Bang等人，</a> <a href="#bookmark23">2023；</a> <a href="#bookmark24">Qin等</a>人，<a href="#bookmark24">2023；</a> <a href="#bookmark25">Zhong</a>等人，2023<a href="#bookmark25">），但</a>其中最严重的问题<a href="#bookmark25">之一</a>是幻觉。 许多研究发现<a href="#bookmark10">（Zhang 等，2023b；</a><a href="#bookmark26">Shuster</a>等，<a href="#bookmark26">2021</a>），被激活的过时信息或错误知识都会严重导致幻觉。大规模不规范的训练数据收集、高质量采样数据比例低、输入空间的数据分配不完善等诸多现实因素都可能影响 LLMs 并加剧问题。因此，在大多数实际应用中，缺乏准确和具体的知识显然会导致误导甚至不准确的生成，这将严重损害用户的体验。 <strong>检索增强生成</strong> <a href="#bookmark12">RAG（Lewis</a> <a href="#bookmark12">等人，</a> <a href="#bookmark12">2020；</a> <a href="#bookmark13">Guu 等人，</a> <a href="#bookmark13">2020）被认为是</a>解决上述问题的有效方法，它利用检索文档增强了生成式 LM 的输入问题。 它通常从特定的语料库（如维基百科）中提供额外的知识源，这大大提高了生成式 LM 在各种任务中的性能，尤其是在知识密集型任务中。 所提出的方法一般利用信息检索为生成式 LLM 提供包含相关知识的文档。早期的研究要么采用 稀疏或密集检索器，并将其置于预先训练好的语言模型的前端，专门用于生成响应。尽管如此，上述方法通常会忽略一个问题：<em>如果检索出错了怎么办？</em>因为引入检索的目的是确保生成式 LM 能够获得相关的准确知识。 如果检索到的文档不相关，检索系统甚至会加剧 LM 所犯的事实错误。</p>
+</li>
+<li><p><strong>先进的 RAG</strong> 近年来，在原始 RAG 的基础上发展出了许多先进的方法。 考虑到检索对于某些查询来说有时是不必要的，反之，在许多情况下，不进行检索的响应甚至会更加准确。 Self-RAG<a href="#bookmark20">（Asai et al</a>. <a href="#bookmark27">Yoran 等人（2023 年）设计了一个 NLI 模型</a>来识别无关上下文并提高鲁棒性。 SAIL<a href="#bookmark28">（Luo 等人，</a> <a href="#bookmark28">2023</a> 年）根据指令进行调整，在结构化之前插入检索到的文档。而 Toolformer<a href="#bookmark29">（Schick 等人，2023</a> 年）则针对调用维基百科等 API 进行了预先训练。此外，在某些长文本生成任务中，需要多次使用外部知识，因此应关注何时检索。<a href="#bookmark30">Jiang 等人</a> <a href="#bookmark30">（2023 年）</a>在长文本生成中<a href="#bookmark30">主动预测未来内容，并决定</a>何时检索和检索什么。</p>
+</li>
+<li><a href="#bookmark29">与最近的研究</a>（<a href="#bookmark29">Schick 等人，</a>2023 年<a href="#bookmark29">；</a> <a href="#bookmark28">Luo 等</a>人，<a href="#bookmark28">2023 年；</a> <a href="#bookmark20">Asai</a>等人，<a href="#bookmark20">2023</a> 年）<a href="#bookmark29">相比，与</a>我们的工作最相关的<a href="#bookmark29">研究</a>有一个主要区别。 这些方法的目标是利用检索作为增强生成的有用工具或检索是否必要，而本研究特别研究了检索器返回不准确结果的情况。据我们所知，本文首次尝试探索和设计 RAG 的纠正策略，以提高其生成的鲁棒性。</li>
+</ol>
+<h2 id="3-任务制定"><a href="#3-任务制定" class="headerlink" title="3 任务制定"></a>3 任务制定</h2><p>根据之前的工作（Lewis 等人，2020；<a href="#bookmark20">Asai</a>等人，2023），给定输入X和包含大量知识文档 C = {d1 ,…, dN } 的可访问语料库，系统有望生成输出 Y。整个框架通常分为检索器 R 和生成器 G。检索器 R 的目的是从语料库 C 中检索出与输入 X 相关的前 K 篇文档 D = {dr1 ,…,dr k }，生成器 G 负责根据输入 X 和检索结果 D 生成输出 Y。</p>
+<p>这个框架可以表述为，</p>
+<script type="math/tex; mode=display">
+P(Y \mid X)=P(D \mid X) P(Y, D \mid X) .</script><p>这表明，检索器和生成器是紧密耦合的，表现出较低的风险容忍度。任何不成功的检索都会导致不满意的响应，而不管生成器的能力有多强大。这正是本文的重点，即提高生成器的鲁棒性。</p>
+<h2 id="4-CRAG"><a href="#4-CRAG" class="headerlink" title="4 CRAG"></a><strong>4 CRAG</strong></h2><p><strong>4.1 模型推理概述</strong></p>
+<p>图<a href="#bookmark31">2</a>和算法 1 展示了 CRAG 的推理概述，它设计了纠正策略来提高生成的鲁棒性。给定输入查询和从任何检索器检索到的文档，构建一个轻量级检索评估器来估计检索文档与输入查询的相关性得分（第<a href="#bookmark32">4.2</a> 节）。相关性得分被量化为总共三个置信度，然后触发相应的操作： {正确、不正确、模糊}（第<a href="#bookmark33">4.3</a> 节）。如果触发了 “正确 “操作，检索到的文档将被重新细化为更精确的知识条带。  这一细化操作包括知识解定位、过滤和重新组合（第<a href="#bookmark34">4.4</a> 节）。如果触发 “不正确 “操作，检索到的文档将被丢弃。取而代之的是网络搜索，并将其视为更正的补充知识源（第<a href="#bookmark35">4.5</a> 节）。最后，在无法做出正确或错误的判断时，就会触发一个软性的、平衡的、将两者结合在一起的 “模糊 “操作。在优化检索结果后，可以采用任意生成模型。</p>
+<p><strong>4.2 检索评价器</strong></p>
+<p>在使用检索到的文档之前，人们自然会怀疑它们是否准确，这一点非常重要，因为通过这种方式可以识别出不相关或误导性的信息。不可否认，检索评价器的准确性对整个系统的性能起着关键作用，因为它影响着后续流程的结果。我们的目标是修正检索到的不相关文档。具体来说，我们<a href="#bookmark36">采用</a>T5-large<a href="#bookmark36">（Raffel</a> <a href="#bookmark36">等人，2020 年）对检索</a>评估器进行<a href="#bookmark36">初始化</a>和微调。 用于微调评价器的相关性信号可以从现有数据集中收集。有关微调步骤的更多详情，请参阅附录<a href="#bookmark37">B.2</a>。对于每个问题，一般会检索到 10 个文档。问题与每个单个文档作为输入进行串联，然后评价器分别预测每个问题-文档对的相关性得分。我们还尝试提示 ChatGPT 识别检索相关性以进行比较，但其表现不佳，详见第<a href="#bookmark38">5.5</a>节。根据这些计算出的相关性分数，我们会对检索是否与操作触发相关联做出最终判断。  与对 LLaMA-2 进行<a href="#bookmark20">指令</a>调整的 Self-RAG 的批评者模型<a href="#bookmark20">（Asai 等人，</a> <a href="#bookmark20">2023</a> 年）相比（7B），CRAG 中设计的评估器具有相当轻便的优势（0.77B）。</p>
+<p><strong>4.3 动作触发</strong></p>
+<p>为了修正不相关文档并根据需要完善目标文档，应该有区别地执行相应的操作。根据上述每个检索到的文档的置信度得分，我们设计了三种类型的操作，并根据设定的上下阈值进行触发。如果可信度得分高于上阈值</p>
+<p>如果低于下阈值，则识别为不正确。  否则，执行模糊处理。每个检索到的文档都要单独进行处理，并最终进行整合。</p>
+<p><strong>正确</strong> 在这里，当<em>至少有一份检索到</em> 的文档的置信度得分高于上阈值时，检索结果就被认为是正确的。如果是这样，说明检索结果中有相关文档。即使能找到相关文档，该文档中也不可避免地存在一些噪声知识条。   为了提取该文档中最关键的知识条，我们将进一步设计一种知识细化方法，该方法将在第<a href="#bookmark34">4.4</a>节中详细阐述。</p>
+<p><strong>不正确</strong> 此外，当<em>所有</em> 检索到的文档的置信度得分都低于下限阈值时，检索就被认为是不正确的。这表明所有检索到的文档都被认为是不相关的，对生成没有帮助。   因此，我们需要寻找新的知识来源进行修正。 在这里，我们引入了网络搜索，从互联网上进行搜索，这在第<a href="#bookmark35">4.5</a>节中有详细阐述<a href="#bookmark35">。</a> 这一纠正措施有助于克服无法参考可靠知识的尴尬难题。</p>
+<p><strong>模棱两可</strong> 除上述两种情况外，其余情况将被归入 “模棱两可 “的中间操作。由于检索评估者对自己的判断并不自信，因此正确和不正确两种类型的处理知识会相互结合，互为补充。 采用这种软性调节策略可大大有助于增强系统的稳健性和复原力，促进建立一个适应性更强的框架，以实现最佳性能。</p>
+<p><strong>4.4 知识提炼</strong></p>
+<p>对于检索到的相关文档，我们设计了一种先分解再组合的知识提炼方法，以进一步提取其中最关键的知识条。 首先，通过启发式规则将每个检索到的文档分割成细粒度的知识条，详情见附录<a href="#bookmark37">B.2</a>。然后，使用第<a href="#bookmark32">4.2</a>节中微调过的检索评价器来计算每个知识条的相关性得分。 根据这些分数，不相关的知识条带被过滤掉，而相关的知识条带则按顺序通过连接重新组合，即内部知识。</p>
+<p><strong>4.5 网络搜索</strong></p>
+<p>如果检索到的结果都是不相关的，那么寻求外部知识的补充就极为重要。</p>
+<p>假定都是不相关的，那么寻求补充性外部知识就显得极为重要。  由于从静态和有限的语料库中检索只能返回在范围和多样性方面次优的文档，因此大规模网络搜索<a href="#bookmark18">（Piktus 等</a>人，<a href="#bookmark18">2021 年；</a> <a href="#bookmark19">Komeili</a>等人<a href="#bookmark19">，2022 年）作为</a>RAG 的<a href="#bookmark19">战略扩展被整合进来</a>。具体来说，输入内容会被 ChatGPT 改写成由关键词组成的查询，以模拟搜索引擎的日常使用。   改写提示见附录<a href="#bookmark39">A</a>。<a href="#bookmark40">2</a>此外，我们还利用 URL 链接来浏览网页、转录网页内容，并采用与第<a href="#bookmark34">4.4</a>节相同的知识提炼方法来获取相关的网络知识，即外部知识。</p>
+<p><strong>5 实验</strong></p>
+<p>我们通过实验广泛展示了 CRAG 对基于 RAG 的方法的适应性及其在短表和长表生成任务中的通用性。</p>
+<p><strong>5.1 任务、数据集和指标</strong></p>
+<p>CRAG 在四个数据集上进行了评估，包括<strong>PopQA</strong> <a href="#bookmark8">（Mallen 等</a>人，<a href="#bookmark8">2023</a> 年）（<em>短表</em>生成）、<strong>Biography</strong> <a href="#bookmark9">（Min 等</a>人，<a href="#bookmark9">2023</a> 年）（<em>长表</em>生成）<strong>、PubHealth</strong> （<a href="#bookmark21">Zhang 等人，2023 年a）（</a><em>真假</em> 问题）和<strong>Arc-Challenge</strong>  （<a href="#bookmark22">Bhaktha</a>- vatsalam 等人，<a href="#bookmark21">2023</a>年<a href="#bookmark22">b</a>）。</p>
+<p><a href="#bookmark22">vatsalam 等</a>人，<a href="#bookmark22">2021 年）（<em>多选题</em> ）</a>。根据之前的工作，PopQA、PubHealth 和 Arc-Challenge 采用准确率作为评价指标。传记》采用<a href="#bookmark9">FactScore（Min 等人，</a> <a href="#bookmark9">2023 年）</a>作为评价指标。读者可参阅附录<a href="#bookmark42">B.1 了解</a>更多详情。</p>
+<p><strong>5.2 基线</strong></p>
+<p>我们主要将 CRAG 与不带检索和带检索的方法进行了比较，后者包括标准 RAG 和高级 RAG。</p>
+<p><strong>无检索基线。</strong>我们评估了一些公共 LLM：LLaMA2-7B<a href="#bookmark43">,13B（Touvron 等</a>人，<a href="#bookmark43">2023b</a>）、指令调整模型 Alpaca-7B,<a href="#bookmark43">13B</a>（<a href="#bookmark44">Dubois</a> 等人，2023）和 CoVE65B（<a href="#bookmark45">Dhuliawala</a> <a href="#bookmark45">等人，2023）</a>，后者<a href="#bookmark45">引入了迭代工程</a>来改进 LLM 世代的事实性。此外，还包括 LLaMA2-chat13B 和 ChatGPT 等实用 LLM。</p>
+<p><strong>标准 RAG。</strong> 我们对标准<a href="#bookmark12">RAG（Lewis 等人，2020 年）</a>进行了评估，在标准<a href="#bookmark12">RAG</a>中，<a href="#bookmark12">LLM</a>使用与我们系统中相同的检索器，在查询前加上检索到的最前沿文档<a href="#bookmark12">来生成</a>输出。   在这里，我们采用了几种公开指令调整的 LLM，包括 LLaMA2-<a href="#bookmark43">7B, 13B (Touvron et al.,2023b)、Alpaca-7B,13</a>B (<a href="#bookmark44">Dubois</a>et al.,<a href="#bookmark44">2023</a>)，以及 Self-RAG 中指令调整的 LLaMA2-7B<a href="#bookmark20">(Asai et al.,2023</a>)。</p>
+<p><strong>高级 RAG。</strong><a href="#bookmark28">(1) SAIL（Luo 等人，2023 年）</a>在 Alpaca 指令调优数据上对 LM 进行了指令调优，并在指令前插入了最高检索文档。  (2) Self-RAG（<a href="#bookmark20">Asai</a>等人，<a href="#bookmark20">2023</a> 年）在指令调谐数据上对 LLaMA2 进行了调谐，该数据包含几组由 GPT-4 标记的反射标记<a href="#bookmark46">（OpenAI，</a> <a href="#bookmark46">2023</a> 年）。 (3) 继<a href="#bookmark20">Asai 等人</a> <a href="#bookmark20">（2023 年）</a>之后<a href="#bookmark20">，我们还</a>引用了使用私人数据训练的检索增强基线的结果： Ret-ChatGPT和Ret- LLaMA-chat采用了上述相同的增强技术，perplexity.ai则是基于InstructGPT的生产搜索系统。</p>
+<p><strong>5.3 结果</strong></p>
+<p>表<a href="#bookmark41">1</a>列出了四个数据集的结果。将所提方法与标准 RAG 相结合的模型命名为 CRAG，与 Self RAG 相结合的模型命名为 Self-CRAG。读者可参阅附录<a href="#bookmark37">B.2 了解</a>我们所提方法的更多实施细节。从这些结果中，我们可以得出以下结论：</p>
+<p><em>首先，我们提出的方法可以显著提高 RAG 和 Self-RAG 的性能。</em></p>
+<p>具体来说，当基于<em>SelfRAG-LaMA2-7b</em> 时，CRAG 在 PopQA 上的准确率为 19.0%，在 Biography 上的 FactScore 为 14.9%，在 PubHealth 上的准确率为 36.6%，在 Arc-Challenge 上的准确率为 8.1%；当基于<em>LLaMA2-hf-7b</em> 时，CRAG 在 PopQA 上的准确率为 2.1%，在 Biography 上的 FactScore 为 2.8%，在 Arc-Challenge 上的准确率为 2.0%。与目前最先进的 Self RAG 相比，当基于<em>LLaMA2-hf-7b</em> 时，Self-CRAG 在 PopQA 上的准确率为 20.0%，在 Biography 上的 FactScore 为 36.9%，在 Arc-Challenge 上的准确率为 4.0%；当基于<em>SelfRAG-LaMA2-7b</em> 时，Self-CRAG 在 PopQA 上的准确率为 6.9%，在 Biography 上的 FactScore 为 5.0%，在 PubHealth 上的准确率为 2.4%。这些结果表明了 CRAG 的适应性，即插即用，可用于基于 RAG 的方法。</p>
+<p><em>其次，所提出的方法在各种基因迭代任务中具有很强的通用性。</em>  特别是表<a href="#bookmark41">1</a>中报告的这些基准<a href="#bookmark41">分别</a>代表了不同的实际场景，包括短格式实体生成（PopQA）、长格式生成（Bi- ography）和封闭集任务（PubHealth、Arc- Challenge）。 这些结果验证了 CRAG 的一贯有效性。它在一系列特定任务中的通用性凸显了其在不同场景中的强大能力和通用性。</p>
+<p><em>第三，拟议方法在替换底层 LLM 生成器时表现出更大的灵活性。</em> 我们可以看到，当底层 LLM 从<em>SelfRAG-LLaMA2-7b</em> 变为<em>LLaMA2-hf-7b</em> 时，CRAG 仍然表现出极具竞争力的性能，而 Self-RAG 的性能则大幅下降，甚至在多个基准测试中表现逊于标准 RAG。 出现这些结果的原因是，Self-RAG 需要使用人类或 LLM 注释的数据进行指令调整，才能学会根据需要输出特殊的批注标记，而这种能力在普通 LLM 中是学不到的。 CRAG 对这种能力没有任何要求。 可以想象，当将来有更先进的 LLM 时，它们可以很容易地与 CRAG 相结合，而对于 Self-RAG 来说，额外的指令调整仍然是必要的。</p>
+<p>5.4 消融研究</p>
+<ul>
+<li><p>每个触发动作的影响。   </p>
+<p>  为了进一步验证检索评估器中所设计的触发动作的有效性，我们对拟议方法中移除的每个单一动作进行了消减测试，如表 2 所示。我们在 PopQA 数据集上进行了评估，以证明在准确性方面的性能变化。 具体来说，当删除 “正确或不正确 “动作时，该动作会与 “模糊 “动作合并，这样原本触发 “正确或不正确 “动作的比例就会触发 “模糊 “动作。 另一方面，当删除 “模糊 “操作时，只有一个阈值能让所有输入查询明确触发 “正确 “或 “不正确”。   从这些结果可以看出，无论删除哪个操作，性能都会下降，这说明每个操作都有助于提高生成的鲁棒性。</p>
+</li>
+</ul>
+<ul>
+<li><p>每个知识利用操作的影响。  </p>
+<p>  表 3 说明了删除关键知识利用操作后性能的变化情况。在 PopQA 数据集上对准确率进行评估时，分别删除了文档细化、搜索查询重写和外部知识选择等知识利用操作。取消文档细化表示将原始检索文档直接输入到后续生成器中，与大多数现有工作一样。此外，去掉搜索查询重写表示在知识搜索过程中，问题不会被重写成由关键词组成的查询。最后，去掉知识选择指的是所有搜索到的网页内容都被视为外部知识，没有经过选择。 这些结果有助于得出这样的结论，即无论取消哪种知识利用操作，最终系统的性能都会下降，这表明每种知识利用操作都有助于提高知识的利用率。</p>
+</li>
+</ul>
+<p>5.5 检索评价器的准确性<br>检索评估器的质量在很大程度上决定了整个系统的性能。鉴于文档检索结果，我们评估了检索评价器能否准确判断这些结果的整体质量。在 PopQA 数据集上，我们的检索评价器和商业 LLM ChatGPT 对文档检索结果的评估准确率如表 4 所示。实验中使用的 ChatGPT、ChatGPT-CoT 和 ChatGPT-few-shot 的提示信息可参见附录 A。结果表明，基于 T5 的轻量级再三值评价器在所有情况下的表现都明显优于具有竞争力的 ChatGPT。</p>
+<p>5.6 对检索性能的鲁棒性<br>为了进一步验证所提方法对检索性能的鲁棒性，我们研究了不同检索性能下生成性能的变化情况。我们故意随机删除一部分准确的检索结果，以模仿低质量的检索结果，并评估其性能变化情况。图3展示了Self-RAG和Self-CRAG在PopQA数据集上的性能变化。  可以看出，随着检索性能的下降，Self-RAG 和 Self-CRAG 的生成性能也随之下降，这表明生成器在很大程度上依赖于检索器的质量。 此外，随着检索性能的下降，Self-CRAG 的生成性能比 Self-RAG 下降得更小。这些结果表明，在提高检索性能的稳健性方面，Self-CRAG 优于 Self-RAG。</p>
+<p>6 结论<br>本文研究的问题是，如果检索出错，基于 RAG 的方法就会受到挑战，从而向生成式 LM 暴露出不准确和误导性的知识。   为了提高生成的鲁棒性，本文提出了修正检索增强生成方法（Corrective Retrieval Augmented Generation）。从根本上说，轻量级检索评估器是为了有区别地估计和触发三种知识检索行动。 通过进一步利用网络搜索和优化知识利用，CRAG 显著提高了自动自我修正和高效利用检索文档的能力。实验广泛证明了 CRAG 对基于 RAG 的方法的适应性，以及在长短格式生成任务中的通用性。</p>
+<p>局限性<br>虽然我们主要从纠正的角度提出了改进 RAG 框架的建议，但如何更准确、更有效地检测和纠正错误知识仍有待进一步研究。尽管 CRAG 可以与各种基于 RAG 的方法无缝结合，但对检索评估器进行微调是不可避免的。  此外，网络搜索带来的潜在偏差也值得关注。  互联网资源的质量可能会有很大差异，如果不充分考虑这些数据，可能会给生成的输出结果带来噪音或误导性信息。未来的工作将进一步探索更加稳定可靠的检索增强方法。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Luke</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2024/04/11/C-RAG/">http://example.com/2024/04/11/C-RAG/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">Luke's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/avatar1.JPG" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/04/11/Self-RAG/" title=""><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info"></div></div></a></div><div class="next-post pull-right"><a href="/2024/04/10/RGA%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/" title=""><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info"></div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar1.JPG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Luke</div><div class="author-info__description">See the world, find yourself.</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/xxxxx" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:xxxxxx@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">代码随想录算法题，持续更新中！！！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Abstract"><span class="toc-number">1.</span> <span class="toc-text">Abstract</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction"><span class="toc-number">2.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%9B%B8%E5%85%B3%E5%B7%A5%E4%BD%9C"><span class="toc-number">3.</span> <span class="toc-text">2 相关工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E4%BB%BB%E5%8A%A1%E5%88%B6%E5%AE%9A"><span class="toc-number">4.</span> <span class="toc-text">3 任务制定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-CRAG"><span class="toc-number">5.</span> <span class="toc-text">4 CRAG</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/29/%E7%A7%8D%E5%AD%90%E7%8F%AD%E7%AC%94%E8%AE%B0/" title="无题">无题</a><time datetime="2024-06-29T09:21:38.427Z" title="发表于 2024-06-29 17:21:38">2024-06-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/11/Graph%20RAG%20%E4%B8%8E%20Text2Cypher%20%E7%9A%84%E5%AF%B9%E6%AF%94/" title="无题">无题</a><time datetime="2024-06-11T08:14:20.029Z" title="发表于 2024-06-11 16:14:20">2024-06-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/05/RAG%E9%9D%A2%E8%AF%95%E9%A2%98/" title="无题">无题</a><time datetime="2024-06-05T02:05:58.294Z" title="发表于 2024-06-05 10:05:58">2024-06-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/04/11/Self-RAG/" title="无题">无题</a><time datetime="2024-04-11T06:22:25.781Z" title="发表于 2024-04-11 14:22:25">2024-04-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/04/11/C-RAG/" title="无题">无题</a><time datetime="2024-04-11T02:39:42.121Z" title="发表于 2024-04-11 10:39:42">2024-04-11</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2024 By Luke</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
